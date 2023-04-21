@@ -1,6 +1,17 @@
-# Stern Stats
+# Sternbot
 
 An app to scrape player stats fom Stern Insider Connected.
+
+## Synopsis
+
+This bot responds to Slack commands:
+
+```
+:pinball: players
+:pinball: leaderboard
+:pinball: add some_username
+:pinball: remove some_username
+```
 
 ## Data Model
 
@@ -9,7 +20,8 @@ every new observation of a high score, which gives us fake history.
 
 ## Maintenance
 
-The action happens in a background job that re-enqueues itself on completion. To kick this off for the first time, with a one minute delay between runs:
+The action happens in a background job that re-enqueues itself on completion.
+To kick this off for the first time, with a one minute delay between runs:
 
     SyncJob.perform_later(1.minute)
 
