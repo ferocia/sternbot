@@ -28,3 +28,7 @@ To kick this off for the first time, with a one minute delay between runs:
 To remove this job:
 
     GoodJob::Job.all.each(&:destroy)
+
+This should be redone to use GoodJob's cron mechanism, right now it's fragile
+because in some cases (deploys, unexpected failure) the job can die and not
+reschedule itself.
