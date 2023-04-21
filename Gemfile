@@ -73,3 +73,4 @@ gem "pry"
 
 gem "pg"
 gem "terminal-table"
+gem 'good_job'

@@ -1,0 +1,1 @@
+LOGGER = Logger.new(STDOUT)

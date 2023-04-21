@@ -1,10 +1,14 @@
 Capybara.threadsafe = true
 
 class SternInsiderScraper
+  def self.username
+    ENV.fetch("INSIDER_USERNAME")
+  end
+
   def login!
     session.visit '/login'
 
-    session.fill_in 'Email', with: ENV.fetch("INSIDER_USERNAME")
+    session.fill_in 'Email', with: self.class.username
     session.fill_in 'Password', with: ENV.fetch("INSIDER_PASSWORD")
 
     session.click_button 'Done'
@@ -94,7 +98,8 @@ class SternInsiderScraper
   end
 
   def session
-    @session ||= Capybara::Session.new(:selenium_chrome) do |config|
+    # Switch to :selenium_chrome to debug non-headless
+    @session ||= Capybara::Session.new(:selenium_chrome_headless) do |config|
       config.run_server = false
       config.app_host = 'https://insider.sternpinball.com/'
       config.default_max_wait_time = 5
