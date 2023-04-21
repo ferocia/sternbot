@@ -41,9 +41,8 @@ class SternInsiderScraper
     if Rails.const_defined?("Console")
       puts e.inspect
       binding.pry
-    else
-      raise e
     end
+    raise e
   end
 
   def add_connection!(username)
@@ -69,9 +68,8 @@ class SternInsiderScraper
     if Rails.const_defined?("Console")
       puts e.inspect
       binding.pry
-    else
-      raise e
     end
+    raise e
   end
 
   def remove_connection!(username)
@@ -88,23 +86,26 @@ class SternInsiderScraper
       session.click_button "Unfollow"
     end
     session.go_back
+    true
   rescue => e
     if Rails.const_defined?("Console")
       puts e.inspect
       binding.pry
-    else
-      raise e
     end
+    raise e
   end
 
   def session
     # From https://github.com/heroku/heroku-buildpack-google-chrome
     chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
 
-    chrome_opts = chrome_bin ? { "chromeOptions" => { "binary" => chrome_bin } } : {}
-
     options = Selenium::WebDriver::Chrome::Options.new
+    # ... I don't think this does anything
     options.binary = chrome_bin if chrome_bin
+
+    # Discovered this by spelunking in the webdrivers code. I'm not really sure
+    # how all these gems interact...
+    Selenium::WebDriver::Chrome.path = chrome_bin
 
     # Comment out for debugging
     options.add_argument('--headless')

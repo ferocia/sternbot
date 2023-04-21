@@ -39,9 +39,11 @@ class Syncer
     scraper = SternInsiderScraper.new
     scraper.login!
     tag = scraper.add_connection!(username)
-    player = Player.create!(tag: tag, username: username)
-    scraper.quit
-    player
+    if tag
+      player = Player.create!(tag: tag, username: username)
+      scraper.quit
+      player
+    end
   end
 
   def self.remove_player!(username)
@@ -49,9 +51,10 @@ class Syncer
     return unless p
     scraper = SternInsiderScraper.new
     scraper.login!
-    scraper.remove_connection!(username)
-    scraper.quit
+    if scraper.remove_connection!(username)
+      p.destroy
+    end
 
-    p.destroy
+    scraper.quit
   end
 end
