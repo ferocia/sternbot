@@ -22,20 +22,42 @@ class SternInsiderScraper
     session.find('a', text: player_tag).click
     session.click_link 'Godzilla'
 
-    score = session.find('th', text: 'HIGH SCORE')
+    summary_tds = session.find('th', text: 'HIGH SCORE')
       .send(:parent) # tr
       .send(:parent) # thead
       .send(:parent) # table
       .find('tbody')
       .find('tr')        # Only one row in this table
-      .find_all('td')[1] # Second column
-      .text
+      .find_all('td')
+
+    score = summary_tds[1].text
+    plays = summary_tds[2].text
+
+    achievements = []
+    section = session.find('h1', text: 'Achievements')
+      .find(:xpath, 'ancestor-or-self::section[1]')
+
+    groups = section.find_all('li.px-6')
+
+    groups.each do |group|
+      name = group.find('.text-xs').text
+      stars = group.find_all('li').map(&:text).map {|x| x.match?(/^Complete/) }
+      slugs = Achievements.slugs_for(name)
+
+      if stars.length != slugs.length
+        raise "unexpected lengths, #{stars.inspect} vs #{slugs.inspect}"
+      end
+
+      achievements += slugs.zip(stars).select {|_, x| x }.map(&:first)
+    end
 
     session.go_back
     session.go_back
 
     {
-      high_score: score.gsub(/[^0-9]/, "").to_i
+      high_score: score.gsub(/[^0-9]/, "").to_i,
+      plays: plays.gsub(/[^0-9]/, "").to_i,
+      achievements: achievements
     }
   rescue => e
     if Rails.const_defined?("Console")
@@ -105,10 +127,10 @@ class SternInsiderScraper
 
     # Discovered this by spelunking in the webdrivers code. I'm not really sure
     # how all these gems interact...
-    Selenium::WebDriver::Chrome.path = chrome_bin
+    Selenium::WebDriver::Chrome.path = chrome_bin if chrome_bin
 
     # Comment out for debugging
-    options.add_argument('--headless')
+    #options.add_argument('--headless')
 
     Capybara.register_driver :chrome do |app|
       Capybara::Selenium::Driver.new(

@@ -3,24 +3,34 @@
 require 'nokogiri'
 require 'json'
 
-doc = Nokogiri::HTML(File.read("data/godzilla-achievements.html"))
-li_items = doc.css('li.items-start')
-li_items = doc.css('ul.mb-11').css('li.items-start.text-lg')
-
-data = li_items.map do |item|
-  # puts item.css('.flex-shrink-0')[0].text
-
-  name = item.css('.mr-5')[0].text
-  desc = item.css('.mb-3')[0].text
-  points = item.css('.text-xs')[0].text
-
-  {
-    slug: name.downcase.gsub(/[^a-z0-9]+/, "-"),
-    name: name,
-    description: desc,
-    points: points.gsub(/pts/, "")
-  }
+def slugify(input)
+  input.downcase.gsub(/[^a-z0-9]+/, "-")
 end
+
+doc = Nokogiri::HTML(File.read("data/godzilla-achievements.html"))
+sections = doc.css('ul.mb-11').css('li.pb-5')
+
+data = []
+sections.each do |section|
+  group_slug = slugify(section.css('.hd-xs.text-red').text)
+  items = section.css('li.items-start.text-lg')
+
+  items.map do |item|
+    name = item.css('.mr-5')[0].text
+    desc = item.css('.mb-3')[0].text
+    points = item.css('.text-xs')[0].text
+
+    data << {
+      group: group_slug,
+      slug: slugify(name),
+      name: name,
+      description: desc,
+      points: points.gsub(/pts/, "")
+    }
+  end
+end
+
+
 
 puts "Parsed #{data.length} achievements"
 
