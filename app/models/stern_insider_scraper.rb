@@ -103,15 +103,20 @@ class SternInsiderScraper
 
     chrome_opts = chrome_bin ? { "chromeOptions" => { "binary" => chrome_bin } } : {}
 
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.binary = chrome_bin if chrome_bin
+
+    # Comment out for debugging
+    options.add_argument('--headless')
+
     Capybara.register_driver :chrome do |app|
       Capybara::Selenium::Driver.new(
          app,
          browser: :chrome,
-         desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(chrome_opts)
+         options: options
       )
     end
 
-    # Switch to :selenium_chrome to debug non-headless
     @session ||= Capybara::Session.new(:chrome) do |config|
       config.run_server = false
       config.app_host = 'https://insider.sternpinball.com/'
