@@ -6,12 +6,13 @@ class Leaderboard
       .sort_by {|x| x.high_score.to_i }
       .reverse
       .take(n)
+      .select {|x| x.high_score }
       .map.with_index {|x, i| [i + 1, x.tag, x.high_score] }
   end
 
   def self.player_highs
     Player.all
       .sort_by(&:tag)
-      .map {|x| [x.tag, x.high_score] }
+      .map {|x| [x.tag, x.username, x.high_score] }
   end
 end

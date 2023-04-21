@@ -33,24 +33,25 @@ class Syncer
   end
 
   def self.add_player!(username)
+    player = Player.find_by(username: username)
+    return player if player
+
     scraper = SternInsiderScraper.new
     scraper.login!
     tag = scraper.add_connection!(username)
-    Player.create!(tag: tag, username: username)
+    player = Player.create!(tag: tag, username: username)
     scraper.quit
+    player
   end
 
   def self.remove_player!(username)
     p = Player.find_by(username: username)
-    if p
-      scraper = SternInsiderScraper.new
-      scraper.login!
-      scraper.remove_connection!(username)
-      scraper.quit
+    return unless p
+    scraper = SternInsiderScraper.new
+    scraper.login!
+    scraper.remove_connection!(username)
+    scraper.quit
 
-      p.destroy
-    else
-      raise "No player with username #{p}"
-    end
+    p.destroy
   end
 end
