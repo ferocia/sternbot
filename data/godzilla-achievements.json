@@ -1,0 +1,674 @@
+[
+  {
+    "slug": "skill-shot",
+    "name": "Skill Shot",
+    "description": "Make the Skill Shot",
+    "points": "3"
+  },
+  {
+    "slug": "mecha-skill-shot",
+    "name": "Mecha Skill Shot",
+    "description": "Make a Mecha Lane Skill Shot",
+    "points": "2"
+  },
+  {
+    "slug": "secret-skill-shot",
+    "name": "Secret Skill Shot",
+    "description": "Make a Secret Skill Shot",
+    "points": "5"
+  },
+  {
+    "slug": "super-secret-skill-shot",
+    "name": "Super Secret Skill Shot",
+    "description": "Make the Super Secret Skill Shot",
+    "points": "10"
+  },
+  {
+    "slug": "unique-skill-shots",
+    "name": "Unique Skill Shots",
+    "description": "Shoot unique skill shots to collect a Skill Shot at 5X",
+    "points": "10"
+  },
+  {
+    "slug": "tail-whip",
+    "name": "Tail Whip",
+    "description": "Make 5 Tail Whips in a single game",
+    "points": "5"
+  },
+  {
+    "slug": "rage-combo",
+    "name": "Rage Combo",
+    "description": "Complete a Rage Combo",
+    "points": "5"
+  },
+  {
+    "slug": "godzilla-multiball-super-jackpot",
+    "name": "Godzilla Multiball Super Jackpot",
+    "description": "Get a Super Jackpot in Godzilla Multiball",
+    "points": "10"
+  },
+  {
+    "slug": "godzilla-multiball-3x-super-jackpot",
+    "name": "Godzilla Multiball 3X Super Jackpot",
+    "description": "Get a 3X Super Jackpot or above in Godzilla Multiball",
+    "points": "10"
+  },
+  {
+    "slug": "godzilla-multiball-5x-jackpot",
+    "name": "Godzilla Multiball 5X Jackpot",
+    "description": "Collect 5X Godzilla Jackpot in Godzilla Multiball",
+    "points": "15"
+  },
+  {
+    "slug": "ebirah",
+    "name": "Ebirah",
+    "description": "Defeat Ebirah",
+    "points": "10"
+  },
+  {
+    "slug": "titanosaurus",
+    "name": "Titanosaurus",
+    "description": "Defeat Titanosaurus",
+    "points": "10"
+  },
+  {
+    "slug": "gigan",
+    "name": "Gigan",
+    "description": "Defeat Gigan",
+    "points": "10"
+  },
+  {
+    "slug": "megalon",
+    "name": "Megalon",
+    "description": "Defeat Megalon",
+    "points": "10"
+  },
+  {
+    "slug": "5x-megalon",
+    "name": "5X Megalon",
+    "description": "Collect a 5X Megalon award",
+    "points": "5"
+  },
+  {
+    "slug": "dominate-ebirah",
+    "name": "Dominate Ebirah",
+    "description": "Defeat Ebirah in one attempt",
+    "points": "5"
+  },
+  {
+    "slug": "dominate-titanosaurus",
+    "name": "Dominate Titanosaurus",
+    "description": "Defeat Titanosaurus in one attempt",
+    "points": "5"
+  },
+  {
+    "slug": "dominate-gigan",
+    "name": "Dominate Gigan",
+    "description": "Defeat Gigan in one attempt",
+    "points": "5"
+  },
+  {
+    "slug": "dominate-megalon",
+    "name": "Dominate Megalon",
+    "description": "Defeat Megalon in one attempt",
+    "points": "5"
+  },
+  {
+    "slug": "king-ghidorah-win",
+    "name": "King Ghidorah Win",
+    "description": "Score 100 Million+ in Battle vs. King Ghidorah ",
+    "points": "5"
+  },
+  {
+    "slug": "king-ghidorah-big-win",
+    "name": "King Ghidorah Big Win",
+    "description": "Score 500 Million+ in Battle vs. King Ghidorah",
+    "points": "10"
+  },
+  {
+    "slug": "megalon-and-gigan-win",
+    "name": "Megalon and Gigan Win",
+    "description": "Score 30 Million+ in Battle vs Megalon and Gigan",
+    "points": "5"
+  },
+  {
+    "slug": "megalon-and-gigan-big-win",
+    "name": "Megalon and Gigan Big Win",
+    "description": "Score 100 Million+ in Battle vs. Megalon and Gigan",
+    "points": "10"
+  },
+  {
+    "slug": "ghidorah-and-gigan-win",
+    "name": "Ghidorah and Gigan Win",
+    "description": "Score 100 Million+ in Battle vs. Ghidorah and Gigan",
+    "points": "5"
+  },
+  {
+    "slug": "ghidorah-and-gigan-big-win",
+    "name": "Ghidorah and Gigan Big Win",
+    "description": "Score 500 Million+ in Battle vs. Ghidorah and Gigan",
+    "points": "10"
+  },
+  {
+    "slug": "mechagodzilla-multiball",
+    "name": "Mechagodzilla Multiball",
+    "description": "Get a Super Jackpot in Mechagodzilla Multiball ",
+    "points": "10"
+  },
+  {
+    "slug": "tank-attack-multiball",
+    "name": "Tank Attack Multiball",
+    "description": "Start Tank Attack Multiball",
+    "points": "10"
+  },
+  {
+    "slug": "tank-attack-multiball-super-jackpot",
+    "name": "Tank Attack Multiball Super Jackpot",
+    "description": "Get a Super Jackpot in Tank Attack Multiball",
+    "points": "10"
+  },
+  {
+    "slug": "monster-rampage",
+    "name": "Monster Rampage",
+    "description": "Start Monster Rampage",
+    "points": "10"
+  },
+  {
+    "slug": "mega-monster-rampage",
+    "name": "Mega Monster Rampage",
+    "description": "Score 30 Million+ in Monster Rampage",
+    "points": "20"
+  },
+  {
+    "slug": "ultra-monster-rampage",
+    "name": "Ultra Monster Rampage",
+    "description": "Score 200 Million+ in Monster Rampage",
+    "points": "5"
+  },
+  {
+    "slug": "building-destroyed",
+    "name": "Building Destroyed",
+    "description": "Destroy a building",
+    "points": "5"
+  },
+  {
+    "slug": "more-buildings-destroyed",
+    "name": "More Buildings Destroyed",
+    "description": "Destroy 5 buildings in a single game",
+    "points": "25"
+  },
+  {
+    "slug": "destroyer-of-buildings-bronze",
+    "name": "Destroyer of Buildings - Bronze",
+    "description": "Destroy 10 buildings - Lifetime",
+    "points": "5"
+  },
+  {
+    "slug": "destroyer-of-buildings-silver",
+    "name": "Destroyer of Buildings - Silver",
+    "description": "Destroy 25 buildings - Lifetime",
+    "points": "10"
+  },
+  {
+    "slug": "destroyer-of-buildings-gold",
+    "name": "Destroyer of Buildings - Gold",
+    "description": "Destroy 50 buildings - Lifetime",
+    "points": "20"
+  },
+  {
+    "slug": "jet-fighter-attack",
+    "name": "Jet Fighter Attack",
+    "description": "Start Jet Figher Attack",
+    "points": "5"
+  },
+  {
+    "slug": "jet-fighter-attack-complete",
+    "name": "Jet Fighter Attack Complete",
+    "description": "Complete Jet Fighter Attack",
+    "points": "10"
+  },
+  {
+    "slug": "bridge-attack",
+    "name": "Bridge Attack",
+    "description": "Start Bridge Attack",
+    "points": "5"
+  },
+  {
+    "slug": "bridge-attack-multiball",
+    "name": "Bridge Attack Multiball",
+    "description": "Start Bridge Attack Multiball",
+    "points": "10"
+  },
+  {
+    "slug": "bridge-attack-multiball-super",
+    "name": "Bridge Attack Multiball Super",
+    "description": "Get a Super Jackpot in Bridge Attack Multiball",
+    "points": "10"
+  },
+  {
+    "slug": "saucer-attack",
+    "name": "Saucer Attack",
+    "description": "Destroy a Saucer",
+    "points": "5"
+  },
+  {
+    "slug": "double-saucer-attack",
+    "name": "Double Saucer Attack",
+    "description": "Destroy 2 Saucers at once using an alley pass to the pop bumper",
+    "points": "5"
+  },
+  {
+    "slug": "saucer-attack-multiball",
+    "name": "Saucer Attack Multiball",
+    "description": "Start Saucer Attack Multiball",
+    "points": "5"
+  },
+  {
+    "slug": "saucer-attack-multiball-saucer-jackpot",
+    "name": "Saucer Attack Multiball Saucer Jackpot",
+    "description": "Get a Saucer Jackpot in Saucer Attack Multiball",
+    "points": "10"
+  },
+  {
+    "slug": "saucer-destroyer-bronze",
+    "name": "Saucer Destroyer - Bronze",
+    "description": "Destroy 15 Saucers - Lifetime",
+    "points": "5"
+  },
+  {
+    "slug": "saucer-destroyer-silver",
+    "name": "Saucer Destroyer - Silver",
+    "description": "Destroy 50 Saucers - Lifetime",
+    "points": "10"
+  },
+  {
+    "slug": "saucer-destroyer-gold",
+    "name": "Saucer Destroyer - Gold",
+    "description": "Destroy 100 Saucers - Lifetime",
+    "points": "15"
+  },
+  {
+    "slug": "tokyo",
+    "name": "Tokyo",
+    "description": "Destroy Tokyo  ",
+    "points": "15"
+  },
+  {
+    "slug": "paris",
+    "name": "Paris",
+    "description": "Destroy Paris",
+    "points": "15"
+  },
+  {
+    "slug": "london",
+    "name": "London",
+    "description": "Destroy London",
+    "points": "15"
+  },
+  {
+    "slug": "new-york",
+    "name": "New York",
+    "description": "Destroy New York",
+    "points": "15"
+  },
+  {
+    "slug": "planet-x-start",
+    "name": "Planet X Start",
+    "description": "Start Planet X Multiball",
+    "points": "5"
+  },
+  {
+    "slug": "planet-x-complete",
+    "name": "Planet X Complete",
+    "description": "Complete Planet X Multiball",
+    "points": "10"
+  },
+  {
+    "slug": "planet-x-victory-complete",
+    "name": "Planet X Victory Complete",
+    "description": "Complete Victory phase of Planet X",
+    "points": "15"
+  },
+  {
+    "slug": "city-control",
+    "name": "City Control",
+    "description": "Godzilla controls a single city",
+    "points": "5"
+  },
+  {
+    "slug": "city-conqueror",
+    "name": "City Conqueror",
+    "description": "Godzilla controls two cities",
+    "points": "5"
+  },
+  {
+    "slug": "city-king",
+    "name": "City King",
+    "description": "Godzilla controls four cities",
+    "points": "10"
+  },
+  {
+    "slug": "slight-carnage",
+    "name": "Slight Carnage",
+    "description": "Collect a Carnage Bonus of 50 Million+",
+    "points": "5"
+  },
+  {
+    "slug": "massive-carnage",
+    "name": "Massive Carnage",
+    "description": "Collect a Carnage Bonus of 100 Million+",
+    "points": "5"
+  },
+  {
+    "slug": "absolute-carnage",
+    "name": "Absolute Carnage",
+    "description": "Collect a Carnage Bonus 300 Million+",
+    "points": "10"
+  },
+  {
+    "slug": "5-loops",
+    "name": "5 Loops",
+    "description": "Make 5 loops in a single game",
+    "points": "5"
+  },
+  {
+    "slug": "20-loops",
+    "name": "20 Loops",
+    "description": "Make 20 loops in a single game",
+    "points": "15"
+  },
+  {
+    "slug": "5-consecutive-loops",
+    "name": "5 Consecutive Loops",
+    "description": "Make 5 Consecutive Loops",
+    "points": "15"
+  },
+  {
+    "slug": "big-loops-session",
+    "name": "Big Loops Session",
+    "description": "Collect a Loop session total of 25 Million+",
+    "points": "10"
+  },
+  {
+    "slug": "huge-loops-session",
+    "name": "Huge Loops Session",
+    "description": "Collect a Loop session total of 50 Million+",
+    "points": "5"
+  },
+  {
+    "slug": "loops-bronze",
+    "name": "Loops Bronze",
+    "description": "Make 50 Loops - Lifetime",
+    "points": "10"
+  },
+  {
+    "slug": "loops-silver",
+    "name": "Loops Silver",
+    "description": "Make 100 Loops - Lifetime",
+    "points": "15"
+  },
+  {
+    "slug": "loops-gold",
+    "name": "Loops Gold",
+    "description": "Make 250 Loops - Lifetime",
+    "points": "20"
+  },
+  {
+    "slug": "powerline-attack",
+    "name": "Powerline Attack",
+    "description": "Start Powerline Attack",
+    "points": "5"
+  },
+  {
+    "slug": "tesla-strike",
+    "name": "Tesla Strike",
+    "description": "Start Tesla Strike ",
+    "points": "10"
+  },
+  {
+    "slug": "mega-tesla-strike",
+    "name": "Mega Tesla Strike",
+    "description": "Complete Tesla Strike",
+    "points": "15"
+  },
+  {
+    "slug": "heat-ray",
+    "name": "Heat Ray",
+    "description": "Use Heat Ray",
+    "points": "10"
+  },
+  {
+    "slug": "destruction",
+    "name": "Destruction",
+    "description": "Collect Destruction Jackpot",
+    "points": "5"
+  },
+  {
+    "slug": "more-destruction",
+    "name": "More Destruction",
+    "description": "Collect 3 Destruction Jackpots in a single game",
+    "points": "10"
+  },
+  {
+    "slug": "mega-destruction",
+    "name": "Mega Destruction",
+    "description": "Collect 50 Million+ Destruction Jackpot",
+    "points": "20"
+  },
+  {
+    "slug": "3x-destruction",
+    "name": "3X Destruction",
+    "description": "Build Destruction Jackpot to 3X and collect it",
+    "points": "10"
+  },
+  {
+    "slug": "8x-destruction",
+    "name": "8X Destruction",
+    "description": "Build Destruction Jackpot to 8X and collect it",
+    "points": "5"
+  },
+  {
+    "slug": "powered-up-godzilla",
+    "name": "Powered Up Godzilla",
+    "description": "Build up 25 total Godzilla Powerup energy in one game",
+    "points": "5"
+  },
+  {
+    "slug": "power-up-overachiever",
+    "name": "Power Up Overachiever",
+    "description": "Reach Godzilla Powerup Level 15",
+    "points": "5"
+  },
+  {
+    "slug": "city-combo",
+    "name": "City Combo",
+    "description": "Collect a City Combo",
+    "points": "5"
+  },
+  {
+    "slug": "city-combo-set",
+    "name": "City Combo Set",
+    "description": "Collect all the City Combos in one city",
+    "points": "5"
+  },
+  {
+    "slug": "5-city-combos",
+    "name": "5 City Combos",
+    "description": "Collect 5 City Combos in a single game",
+    "points": "5"
+  },
+  {
+    "slug": "all-city-combos",
+    "name": "All City Combos",
+    "description": "Collect all the City Combos in all the cities",
+    "points": "10"
+  },
+  {
+    "slug": "city-combos-bronze",
+    "name": "City Combos - Bronze",
+    "description": "Collect 10 City Combos - Lifetime",
+    "points": "5"
+  },
+  {
+    "slug": "city-combos-silver",
+    "name": "City Combos - Silver",
+    "description": "Collect 25 City Combos - Lifetime",
+    "points": "10"
+  },
+  {
+    "slug": "city-combos-gold",
+    "name": "City Combos - Gold",
+    "description": "Collect 50 City Combos - Lifetime",
+    "points": "15"
+  },
+  {
+    "slug": "hedorah-smoked",
+    "name": "Hedorah Smoked",
+    "description": "Score 50 Million+ during Hedorah",
+    "points": "5"
+  },
+  {
+    "slug": "secret-combo",
+    "name": "Secret Combo",
+    "description": "Collect a Secret Combo",
+    "points": "5"
+  },
+  {
+    "slug": "all-secret-combos",
+    "name": "All Secret Combos",
+    "description": "Collect all 10 Secret Combos in a single game",
+    "points": "10"
+  },
+  {
+    "slug": "secret-combos-bronze",
+    "name": "Secret Combos - Bronze",
+    "description": "Collect 50 Secret Combos - Lifetime",
+    "points": "10"
+  },
+  {
+    "slug": "secret-combos-silver",
+    "name": "Secret Combos - Silver",
+    "description": "Collect 150 Secret Combos - Lifetime",
+    "points": "15"
+  },
+  {
+    "slug": "secret-combos-gold",
+    "name": "Secret Combos - Gold",
+    "description": "Collect 300 Secret Combos - Lifetime",
+    "points": "20"
+  },
+  {
+    "slug": "imposter-battle-level-1",
+    "name": "Imposter Battle - Level 1",
+    "description": "Collect an Imposter Battle award",
+    "points": "5"
+  },
+  {
+    "slug": "imposter-battle-level-3",
+    "name": "Imposter Battle - Level 3",
+    "description": "Collect 3 Imposter Battle awards in a single game",
+    "points": "10"
+  },
+  {
+    "slug": "imposter-battle-bronze",
+    "name": "Imposter Battle - Bronze",
+    "description": "Collect 10 Imposter Battle awards - Lifetime",
+    "points": "10"
+  },
+  {
+    "slug": "imposter-battle-silver-",
+    "name": "Imposter Battle - Silver ",
+    "description": "Collect 20 Imposter Battle awards - Lifetime",
+    "points": "15"
+  },
+  {
+    "slug": "imposter-battle-gold",
+    "name": "Imposter Battle - Gold",
+    "description": "Collect 30 Imposter Battle awards - Lifetime",
+    "points": "20"
+  },
+  {
+    "slug": "super-train-jackpot",
+    "name": "Super Train Jackpot",
+    "description": "Collect Super Train Jackpot (PREM / LE only)",
+    "points": "5"
+  },
+  {
+    "slug": "super-train-smasher",
+    "name": "Super Train Smasher",
+    "description": "Score 200 Million+ during Super Train (PREM / LE only)",
+    "points": "5"
+  },
+  {
+    "slug": "started-terror-of-mechagodzilla",
+    "name": "Started Terror of Mechagodzilla",
+    "description": "Start Terror of Mechagodzilla mini wizard mode",
+    "points": "10"
+  },
+  {
+    "slug": "terror-of-mechagodzilla-big-win",
+    "name": "Terror of Mechagodzilla Big Win",
+    "description": "Score 1 Billion+ in Terror of Mechagodzilla mini wizard mode",
+    "points": "5"
+  },
+  {
+    "slug": "started-monster-zero",
+    "name": "Started Monster Zero",
+    "description": "Start Monster Zero mini wizard mode",
+    "points": "10"
+  },
+  {
+    "slug": "triple-zero",
+    "name": "Triple Zero",
+    "description": "Lock 3 balls in Monster Zero mini wizard mode",
+    "points": "5"
+  },
+  {
+    "slug": "monster-zero-super-jackpot",
+    "name": "Monster Zero Super Jackpot",
+    "description": "Get a Super Jackpot in Monster Zero mini wizard mode",
+    "points": "5"
+  },
+  {
+    "slug": "started-king-of-the-monsters",
+    "name": "Started King of the Monsters",
+    "description": "Start King of the Monsters wizard mode",
+    "points": "10"
+  },
+  {
+    "slug": "king-of-part-1-monsters",
+    "name": "King of Part 1 Monsters",
+    "description": "Defeat Ebirah, Titanosaurus, Gigan and Megalon in King of the Monsters",
+    "points": "5"
+  },
+  {
+    "slug": "king-of-the-monsters",
+    "name": "King of the Monsters",
+    "description": "Defeat King Ghidorah",
+    "points": "5"
+  },
+  {
+    "slug": "bounty-hunter-500m",
+    "name": "Bounty Hunter 500M",
+    "description": "Collect a King Ghidorah Bounty of 500 Million+",
+    "points": "5"
+  },
+  {
+    "slug": "billion-bounty-hunter",
+    "name": "Billion Bounty Hunter",
+    "description": "Collect a King Ghidorah Bounty of 1 Billion+",
+    "points": "5"
+  },
+  {
+    "slug": "2-billion-bounty-hunter",
+    "name": "2 Billion Bounty Hunter",
+    "description": "Collect a King Ghidorah Bounty of 2 Billion+",
+    "points": "5"
+  },
+  {
+    "slug": "monster-island-madness",
+    "name": "Monster Island Madness",
+    "description": "Start Monster Island Madness",
+    "points": "5"
+  }
+]
