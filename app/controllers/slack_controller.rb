@@ -28,6 +28,15 @@ class SlackController < ApplicationController
             case tokens[0]
             when 'hello'
               SlackNotifier.send_message("hello")
+            when 'help'
+              SlackNotifier.send_message(<<-EOS)
+```
+:pinball: leaderboard {3}
+:pinball: players
+:pinball: add_player {stern_insider_username}
+:pinball: remove_player {stern_insider_username}
+```
+EOS
             when 'leaderboard'
               n = (tokens[1] || 3).to_i
               leaderboard = AsciiLeaderboard.top(n: n)
