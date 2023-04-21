@@ -78,7 +78,9 @@ EOS
     hmac.update("v0:#{timestamp}:#{request_body}")
     expected_signature = "v0=#{hmac.hexdigest}"
 
-    # TODO: Include timestamp validation
+    if (Time.now.utc.to_i - timestamp.to_i).abs > 5.minutes.to_i
+      return false
+    end
 
     ActiveSupport::SecurityUtils.secure_compare(expected_signature, signature)
   end
