@@ -88,6 +88,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_183953) do
     t.datetime "created_at", null: false
     t.string "tag"
     t.string "username"
+    t.index ["tag"], name: "index_players_on_tag", unique: true
+    t.index ["username"], name: "index_players_on_username", unique: true
   end
 
   add_foreign_key "high_scores", "players", column: "players_id"

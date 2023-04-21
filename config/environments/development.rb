@@ -3,7 +3,7 @@ require "active_support/core_ext/integer/time"
 require 'dotenv/load'
 
 Rails.application.configure do
-  config.hosts << /^[a-z0-9-.]+\.ngrok-free\.app$/
+  config.hosts << /^[a-z0-9\-.]+\.ngrok\-free\.app$/
 
   # Settings specified here will take precedence over those in config/application.rb.
 
