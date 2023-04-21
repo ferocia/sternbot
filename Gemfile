@@ -70,3 +70,6 @@ gem "webdrivers"
 
 gem "dotenv"
 gem "pry"
+
+gem "pg"
+gem "terminal-table"
