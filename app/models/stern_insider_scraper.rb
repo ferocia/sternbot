@@ -98,8 +98,21 @@ class SternInsiderScraper
   end
 
   def session
+    # From https://github.com/heroku/heroku-buildpack-google-chrome
+    chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+
+    chrome_opts = chrome_bin ? { "chromeOptions" => { "binary" => chrome_bin } } : {}
+
+    Capybara.register_driver :chrome do |app|
+      Capybara::Selenium::Driver.new(
+         app,
+         browser: :chrome,
+         desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(chrome_opts)
+      )
+    end
+
     # Switch to :selenium_chrome to debug non-headless
-    @session ||= Capybara::Session.new(:selenium_chrome_headless) do |config|
+    @session ||= Capybara::Session.new(:chrome) do |config|
       config.run_server = false
       config.app_host = 'https://insider.sternpinball.com/'
       config.default_max_wait_time = 5
