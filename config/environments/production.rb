@@ -1,6 +1,10 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  # This _should_ be being set my ENV variables...
+  config.good_job.execution_mode = :async
+  config.good_job.max_threads = 1
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
