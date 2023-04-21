@@ -7,7 +7,6 @@ class SlackController < ApplicationController
     timestamp = request.env['HTTP_X_SLACK_REQUEST_TIMESTAMP']
     signature = request.env['HTTP_X_SLACK_SIGNATURE']
 
-    # TODO: lol yeah figure out why request validation is busted
     if is_valid_request?(request_body, timestamp, signature)
       parsed = JSON.parse(request_body)
       case parsed['type']
