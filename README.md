@@ -1,24 +1,18 @@
-# README
+# Stern Stats
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+An app to scrape player stats fom Stern Insider Connected.
 
-Things you may want to cover:
+## Data Model
 
-* Ruby version
+Insider Connected doesn't give us match history, which is annoying. We store
+every new observation of a high score, which gives us fake history.
 
-* System dependencies
+## Maintenance
 
-* Configuration
+The action happens in a background job that re-enqueues itself on completion. To kick this off for the first time, with a one minute delay between runs:
 
-* Database creation
+    SyncJob.perform_later(1.minute)
 
-* Database initialization
+To remove this job:
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+    GoodJob::Job.all.each(&:destroy)
