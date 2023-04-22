@@ -15,4 +15,19 @@ class Leaderboard
       .sort_by(&:tag)
       .map {|x| [x.tag, x.username, x.high_score] }
   end
+
+  def self.achievements
+    data = {}
+    as = Achievement.includes(:player).all
+    as.each do |a|
+      a_data = Achievements.find(a.slug)
+      data[a_data.name] ||= []
+      data[a_data.name] << a.player.tag
+    end
+    denominator = Player.count
+
+    data.map {|row|
+      row << row[1].length / denominator.to_f
+    }.sort_by {|slug, ps| [-ps.size, slug] }
+  end
 end

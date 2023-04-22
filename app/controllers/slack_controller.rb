@@ -20,52 +20,18 @@ class SlackController < ApplicationController
         when 'message'
           text = parsed['text']
 
-          tokens = text.split(/ +/)
-          first = tokens.shift
+          message = SlackCommandProcessor.process(text)
 
-          if first == ":pinball:"
-            case tokens[0]
-            when 'hello'
-              SlackNotifier.send_message("hello")
-            when 'help'
-              SlackNotifier.send_message(<<-EOS)
-```
-:pinball: leaderboard {3}
-:pinball: players
-:pinball: add_player {stern_insider_username}
-:pinball: remove_player {stern_insider_username}
-```
-EOS
-            when 'leaderboard'
-              n = (tokens[1] || 3).to_i
-              leaderboard = AsciiLeaderboard.top(n: n)
-              SlackNotifier.send_message("```\n#{leaderboard}\n```")
-            when 'players'
-              leaderboard = AsciiLeaderboard.player_highs
-              SlackNotifier.send_message("```\n#{leaderboard}\n```")
-            when 'add'
-              username = tokens[1]
-              if username
-                AddPlayerJob.perform_later(username)
-                SlackNotifier.send_message("Adding #{username}, stand by...")
-              end
-            when 'remove'
-              username = tokens[1]
-              if username
-                RemovePlayerJob.perform_later(username)
-                SlackNotifier.send_message("Removing #{username}, stand by...")
-              end
-            else
-              LOGGER.info("Unknown command: #{tokens[0]}")
-            end
+          if message
+            SlackNotifier.send_message(message)
           end
-          head 200
         else
           LOGGER.info("Unhandlend event: #{parsed['type']}")
         end
       else
         LOGGER.info("Unhandlend event: #{parsed['type']}")
       end
+      head 200
     else
       head :bad_request
     end

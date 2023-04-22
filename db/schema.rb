@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_21_183953) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_21_234554) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "achievements", force: :cascade do |t|
+    t.bigint "player_id", null: false
+    t.string "slug", null: false
+    t.datetime "observed_at", null: false
+    t.bigint "players_id"
+    t.index ["player_id", "slug"], name: "index_achievements_on_player_id_and_slug", unique: true
+    t.index ["player_id"], name: "index_achievements_on_player_id"
+    t.index ["players_id"], name: "index_achievements_on_players_id"
+  end
 
   create_table "good_job_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -88,9 +98,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_183953) do
     t.datetime "created_at", null: false
     t.string "tag"
     t.string "username"
+    t.integer "plays", default: 0, null: false
+    t.datetime "synced_at"
     t.index ["tag"], name: "index_players_on_tag", unique: true
     t.index ["username"], name: "index_players_on_username", unique: true
   end
 
+  add_foreign_key "achievements", "players", column: "players_id"
   add_foreign_key "high_scores", "players", column: "players_id"
 end

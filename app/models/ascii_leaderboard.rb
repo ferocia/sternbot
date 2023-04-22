@@ -25,6 +25,19 @@ class AsciiLeaderboard
     t.to_s
   end
 
+  def self.achievements
+    t = new_table!(%w(Name % Tags))
+    Leaderboard.achievements.each do |x|
+      t << [
+        x[0],
+        (x[2] * 100).to_i,
+        x[1].sort.join(", ")
+      ]
+    end
+    t.align_column(1, :right)
+    t.to_s
+  end
+
   def self.new_table!(headings)
     t = Terminal::Table.new(headings: headings)
     t.style = {
