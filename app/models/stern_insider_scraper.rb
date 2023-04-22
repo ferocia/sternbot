@@ -130,7 +130,7 @@ class SternInsiderScraper
     Selenium::WebDriver::Chrome.path = chrome_bin if chrome_bin
 
     # Comment out for debugging
-    #options.add_argument('--headless')
+    options.add_argument('--headless')
 
     Capybara.register_driver :chrome do |app|
       Capybara::Selenium::Driver.new(
