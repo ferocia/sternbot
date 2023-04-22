@@ -13,7 +13,7 @@ class Leaderboard
   def self.player_highs
     Player.all
       .sort_by(&:tag)
-      .map {|x| [x.tag, x.username, x.high_score] }
+      .map {|x| [x.tag, x.username, x.plays, x.high_score] }
   end
 
   def self.achievements

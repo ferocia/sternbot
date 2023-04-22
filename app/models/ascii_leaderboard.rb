@@ -13,15 +13,17 @@ class AsciiLeaderboard
   end
 
   def self.player_highs
-    t = new_table!(%w(Tag Username Best))
+    t = new_table!(%w(Tag Username Plays Best))
     Leaderboard.player_highs.each do |x|
       t << [
         x[0],
         x[1],
-        x[2] ? x[2].to_fs(:delimited) : ""
+        x[2] > 0 ? x[2] : "",
+        x[3] ? x[3].to_fs(:delimited) : ""
       ]
     end
     t.align_column(2, :right)
+    t.align_column(3, :right)
     t.to_s
   end
 
