@@ -21,5 +21,17 @@ module SternStats
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.active_job.queue_adapter = :good_job
+
+    # Overriden in environments
+    config.good_job.enable_cron = true
+
+    config.good_job.cron = {
+      # Every 3 minutes
+      sync_task: {
+        cron: "*/3 * * * *", # cron-style scheduling format by fugit gem
+        class: "SyncJob",
+        description: "Web scraper for Stern Insider"
+      }
+    }
   end
 end

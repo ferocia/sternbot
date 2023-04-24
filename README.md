@@ -20,15 +20,4 @@ every new observation of a high score, which gives us fake history.
 
 ## Maintenance
 
-The action happens in a background job that re-enqueues itself on completion.
-To kick this off for the first time, with a one minute delay between runs:
-
-    SyncJob.perform_later(1.minute)
-
-To remove this job:
-
-    GoodJob::Job.all.each(&:destroy)
-
-This should be redone to use GoodJob's cron mechanism, right now it's fragile
-because in some cases (deploys, unexpected failure) the job can die and not
-reschedule itself.
+The action happens in a background job (`SyncJob`) that is scheduled using Good Job's cron.
