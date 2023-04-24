@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_21_234554) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_24_002150) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -100,6 +100,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_234554) do
     t.string "username"
     t.integer "plays", default: 0, null: false
     t.datetime "synced_at"
+    t.string "stern_id"
     t.index ["tag"], name: "index_players_on_tag", unique: true
     t.index ["username"], name: "index_players_on_username", unique: true
   end

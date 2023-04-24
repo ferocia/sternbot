@@ -21,15 +21,23 @@ class Syncer
       player_notify = notify && player.synced_at
       who = player.username
       LOGGER.info("Scraping stats for #{who}")
-      stats = scraper.stats_for_player(player.tag)
+      stats = scraper.stats_for_player(player)
       now = Time.zone.now
       score = stats.fetch(:high_score)
       plays = stats.fetch(:plays)
       as = stats.fetch(:achievements)
+      stern_id = stats.fetch(:stern_id, nil)
       notifications = []
 
       Player.transaction do
         LOGGER.info("Scraped high score for #{who}: #{score}")
+
+        # this is pretty much temporary until every player has a stern id
+        if player.stern_id.nil? && stern_id.present?
+          LOGGER.info("Updating the stern id for #{who} to #{stern_id}")
+          player.update(stern_id:)
+        end
+
         if score > player.high_score.to_i
           LOGGER.info("Storing new high score for #{who}")
           player.high_scores.create!(

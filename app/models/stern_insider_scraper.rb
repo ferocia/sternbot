@@ -5,6 +5,10 @@ class SternInsiderScraper
     ENV.fetch("INSIDER_USERNAME")
   end
 
+  def self.godzilla_stats_page_url_for(player)
+    "/insider/connections/#{player.stern_id}/gameStats/106"
+  end
+
   def login!
     session.visit '/login'
 
@@ -18,14 +22,16 @@ class SternInsiderScraper
     true
   end
 
-  def stats_for_player(player_tag)
-    session.find('a', text: player_tag).click
-    session.click_link 'Godzilla'
+  def stats_for_player(player)
+    if player.stern_id.present?
+      session.visit godzilla_stats_page_url_for(player)
+    else
+      session.find('a', text: player_tag).click
+      session.click_link 'Godzilla'
+    end
 
     summary_tds = session.find('th', text: 'HIGH SCORE')
-      .send(:parent) # tr
-      .send(:parent) # thead
-      .send(:parent) # table
+      .ancestor('table')
       .find('tbody')
       .find('tr')        # Only one row in this table
       .find_all('td')
@@ -51,13 +57,20 @@ class SternInsiderScraper
       achievements += slugs.zip(stars).select {|_, x| x }.map(&:first)
     end
 
-    session.go_back
-    session.go_back
+    stern_id = session.current_url.match(/connections\/(\d+)\/gameStats/)[1]
+
+    if player.stern_id.present?
+      session.go_back
+    else
+      session.go_back
+      session.go_back
+    end
 
     {
       high_score: score.gsub(/[^0-9]/, "").to_i,
       plays: plays.gsub(/[^0-9]/, "").to_i,
-      achievements: achievements
+      achievements: achievements,
+      stern_id:,
     }
   rescue => e
     if Rails.const_defined?("Console")
