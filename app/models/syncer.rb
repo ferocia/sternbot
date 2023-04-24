@@ -7,8 +7,13 @@ class Syncer
     LOGGER.info("Login successful")
     n = 3
     current_leaderboard = AsciiLeaderboard.top(n: n)
-    Player.all.each do |player|
-      next if username && player.username != username
+    players = if username.present?
+      Player.where(username:)
+    else
+      Player.all
+    end
+
+    players.each do |player|
       player_notify = notify && !player.synced_at
       who = player.username
       LOGGER.info("Scraping stats for #{who}")

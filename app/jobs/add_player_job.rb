@@ -3,7 +3,9 @@ class AddPlayerJob < ApplicationJob
 
   def perform(username)
     player = Syncer.add_player!(username)
-    SlackNotifier.send_message("Added #{username} as #{player.tag}")
+    SlackNotifier.send_message("Added #{username} as #{player.tag}. Syncing data...")
+
+    Syncer.sync!(notify: true, username: player.username)
   rescue => e
     # TODO: should probably have a "why" here???
     SlackNotifier.send_message(<<~EOF)
