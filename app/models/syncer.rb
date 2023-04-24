@@ -14,7 +14,7 @@ class Syncer
     end
 
     players.each do |player|
-      player_notify = notify && !player.synced_at
+      player_notify = notify && player.synced_at
       who = player.username
       LOGGER.info("Scraping stats for #{who}")
       stats = scraper.stats_for_player(player.tag)
