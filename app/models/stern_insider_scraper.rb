@@ -76,14 +76,16 @@ class SternInsiderScraper
     else
       session.click_button "Go"
     end
-    tag = session
-      .find('span', text: username)
-      .send('parent') # div
-      .find('p.uppercase')
-      .text
-    if session.has_button?("Follow")
-      session.click_button "Follow"
+
+    # we want to match the username exactly, but allow for variations in case
+    user_row = session.find('span', exact_text: /#{username}/i).ancestor('li')
+
+    if user_row.has_button?("Follow")
+      user_row.click_button "Follow"
     end
+
+    tag = user_row.find('p.uppercase').text
+
     session.go_back
     tag
   rescue => e
