@@ -95,5 +95,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.good_job.enable_cron = ENV['DYNO'] == 'worker.1'
+  # I have a suspicion heroku doesn't work like this anymore...
+  # We only have a single worker and will for basically ever, so let's just
+  # hard enable.
+  # config.good_job.enable_cron = ENV['DYNO'] == 'worker.1'
+  config.good_job.enable_cron = true
 end
