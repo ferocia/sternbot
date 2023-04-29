@@ -20,7 +20,7 @@ describe Syncer do
 
   before do
     allow(Syncer).to receive(:slack_notifier).and_return(notifier)
-    allow(Syncer).to receive(:scraper).and_return(scraper)
+    allow(SternInsiderScraper).to receive(:new).and_return(scraper)
     allow(LOGGER).to receive(:info)
 
     Player.all.each(&:destroy)
