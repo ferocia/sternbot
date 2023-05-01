@@ -89,9 +89,9 @@ class Syncer
 
     scraper = SternInsiderScraper.new
     scraper.login!
-    tag = scraper.add_connection!(username)
-    if tag
-      player = Player.create!(tag: tag, username: username)
+    res = scraper.add_connection!(username)
+    if res[:tag]
+      player = Player.create!(tag: res[:tag], username: username, stern_id: res[:stern_id])
       scraper.quit
       player
     end

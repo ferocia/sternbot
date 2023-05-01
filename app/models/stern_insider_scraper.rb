@@ -5,6 +5,10 @@ class SternInsiderScraper
     ENV.fetch("INSIDER_USERNAME")
   end
 
+  def self.stern_id_from_url(url)
+    url.match(/connections\/(\d+)\//)[1]
+  end
+
   def self.godzilla_stats_page_url_for(player)
     "/insider/connections/#{player.stern_id}/gameStats/106"
   end
@@ -57,7 +61,7 @@ class SternInsiderScraper
       achievements += slugs.zip(stars).select {|_, x| x }.map(&:first)
     end
 
-    stern_id = session.current_url.match(/connections\/(\d+)\/gameStats/)[1]
+    stern_id = self.stern_id_from_url(session.current_url)
 
     if player.stern_id.present?
       session.go_back
@@ -99,8 +103,11 @@ class SternInsiderScraper
 
     tag = user_row.find('p.uppercase').text
 
+    stern_id = self.stern_id_from_url(user_row.find('a')[:href])
+
     session.go_back
-    tag
+
+    { tag:, stern_id: }
   rescue => e
     if Rails.const_defined?("Console")
       puts e.inspect
@@ -144,8 +151,10 @@ class SternInsiderScraper
     # how all these gems interact...
     Selenium::WebDriver::Chrome.path = chrome_bin if chrome_bin
 
-    # Comment out for debugging
-    options.add_argument('--headless')
+    if ENV["SHOW_CHROME_UI"].nil? || ENV["SHOW_CHROME_UI"] == "0"
+      # Comment out for debugging (or set the envvar to 1)
+      options.add_argument('--headless')
+    end
 
     Capybara.register_driver :chrome do |app|
       Capybara::Selenium::Driver.new(
