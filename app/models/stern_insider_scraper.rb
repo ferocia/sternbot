@@ -9,6 +9,10 @@ class SternInsiderScraper
     url.match(/connections\/(\d+)\//)[1]
   end
 
+  def self.stats_page_url_for(player)
+    "/insider/connections/#{player.stern_id}/stats"
+  end
+
   def self.godzilla_stats_page_url_for(player)
     "/insider/connections/#{player.stern_id}/gameStats/106"
   end
@@ -82,14 +86,7 @@ class SternInsiderScraper
   end
 
   def add_connection!(username)
-    session.fill_in 'Search', with: username
-
-    # Button text changes depending on browser width :cool:
-    if session.has_button?("Search")
-      session.click_button "Search"
-    else
-      session.click_button "Go"
-    end
+    search_for(username)
 
     # we want to match the username exactly, but allow for variations in case
     user_row = session.find('span', exact_text: /#{username}/i).ancestor('li')
@@ -113,14 +110,11 @@ class SternInsiderScraper
     raise e
   end
 
-  def remove_connection!(username)
-    session.fill_in 'Search', with: username
-
-    # Button text changes depending on browser width :cool:
-    if session.has_button?("Search")
-      session.click_button "Search"
+  def remove_connection!(player)
+    if player.stern_id.present?
+      session.visit self.stats_page_url_for(player)
     else
-      session.click_button "Go"
+      self.search_for(player.username)
     end
 
     if session.has_button?("Unfollow")
@@ -136,6 +130,17 @@ class SternInsiderScraper
       binding.pry
     end
     raise e
+  end
+
+  def search_for(username)
+    session.fill_in 'Search', with: player.username
+
+    # Button text changes depending on browser width :cool:
+    if session.has_button?("Search")
+      session.click_button "Search"
+    else
+      session.click_button "Go"
+    end
   end
 
   def return_to_connections_page
