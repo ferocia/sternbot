@@ -133,14 +133,11 @@ class SternInsiderScraper
   end
 
   def search_for(username)
-    session.fill_in 'Search', with: player.username
+    search_field = session.find('input', id: 'username-search')
 
-    # Button text changes depending on browser width :cool:
-    if session.has_button?("Search")
-      session.click_button "Search"
-    else
-      session.click_button "Go"
-    end
+    search_field.fill_in with: username
+
+    search_field.sibling('button').click
   end
 
   def return_to_connections_page
