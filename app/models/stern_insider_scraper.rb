@@ -23,6 +23,8 @@ class SternInsiderScraper
 
     session.click_link 'Connections'
 
+    @default_url = session.current_url
+
     true
   end
 
@@ -63,12 +65,7 @@ class SternInsiderScraper
 
     stern_id = self.stern_id_from_url(session.current_url)
 
-    if player.stern_id.present?
-      session.go_back
-    else
-      session.go_back
-      session.go_back
-    end
+    return_to_connections_page
 
     {
       high_score: score.gsub(/[^0-9]/, "").to_i,
@@ -105,7 +102,7 @@ class SternInsiderScraper
 
     stern_id = self.stern_id_from_url(user_row.find('a')[:href])
 
-    session.go_back
+    return_to_connections_page
 
     { tag:, stern_id: }
   rescue => e
@@ -129,7 +126,9 @@ class SternInsiderScraper
     if session.has_button?("Unfollow")
       session.click_button "Unfollow"
     end
-    session.go_back
+
+    return_to_connections_page
+
     true
   rescue => e
     if Rails.const_defined?("Console")
@@ -137,6 +136,10 @@ class SternInsiderScraper
       binding.pry
     end
     raise e
+  end
+
+  def return_to_connections_page
+    session.visit @default_url
   end
 
   def session
