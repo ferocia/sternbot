@@ -5,4 +5,9 @@ class Player < ApplicationRecord
   def high_score
     @high_score ||= high_scores.maximum(:value)
   end
+
+  def reload
+    @high_score = nil
+    super
+  end
 end

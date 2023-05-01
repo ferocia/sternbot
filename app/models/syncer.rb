@@ -1,4 +1,8 @@
 class Syncer
+  def self.slack_notifier
+    @slack_notifier ||= SlackNotifier
+  end
+
   def self.sync!(notify: false, username: nil)
     LOGGER.info("Starting sync as #{SternInsiderScraper.username}")
     scraper = SternInsiderScraper.new
@@ -67,7 +71,7 @@ class Syncer
   end
 
   def self.notify(message, slack_it)
-    SlackNotifier.send_message(message) if slack_it
+    slack_notifier.send_message(message) if slack_it
     LOGGER.info("Sending to Slack: #{message}")
   end
 
@@ -88,6 +92,7 @@ class Syncer
   def self.remove_player!(username)
     p = Player.find_by(username: username)
     return unless p
+
     scraper = SternInsiderScraper.new
     scraper.login!
     if scraper.remove_connection!(username)
