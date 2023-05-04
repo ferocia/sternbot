@@ -27,11 +27,11 @@ module SternStats
 
     config.good_job.cron = {
       # Every 3 minutes
-      sync_task: {
-        cron: "*/3 * * * *", # cron-style scheduling format by fugit gem
-        class: "SyncJob",
-        description: "Web scraper for Stern Insider"
-      }
+    #  sync_task: {
+    #    cron: "*/3 * * * *", # cron-style scheduling format by fugit gem
+    #    class: "SyncJob",
+    #    description: "Web scraper for Stern Insider"
+    #  }
     }
   end
 end
