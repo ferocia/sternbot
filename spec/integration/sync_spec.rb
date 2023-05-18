@@ -38,7 +38,7 @@ describe Syncer do
     expect(p.username).to eq('donalias')
 
     # it creates a new high score for player when none exists
-    expect(scraper).to receive(:stats_for_player).with('DON').and_return(
+    expect(scraper).to receive(:stats_for_player).with(p).and_return(
       high_score: 100,
       plays: 3,
       achievements: []
@@ -53,7 +53,7 @@ describe Syncer do
     expect(p.plays).to eq(3)
 
     # it creates a new high score for player when higher than best
-    expect(scraper).to receive(:stats_for_player).with('DON').and_return(
+    expect(scraper).to receive(:stats_for_player).with(p).and_return(
       high_score: 110,
       plays: 4,
       achievements: []
@@ -69,7 +69,7 @@ describe Syncer do
     expect(p.plays).to eq(4)
 
     # it does not create new high score if not better
-    expect(scraper).to receive(:stats_for_player).with('DON').and_return(
+    expect(scraper).to receive(:stats_for_player).with(p).and_return(
       high_score: 90,
       plays: 6,
       achievements: []
@@ -95,7 +95,7 @@ describe Syncer do
     p = Player.create!(username: 'donalias', tag: 'DON')
     p.high_scores.create!(value: 100, observed_at: Time.zone.now)
 
-    expect(scraper).to receive(:stats_for_player).with('DON').and_return(
+    expect(scraper).to receive(:stats_for_player).with(p).and_return(
       high_score: 100,
       plays: 3,
       achievements: %w(skill-shot mecha-skill-shot)
@@ -108,7 +108,7 @@ describe Syncer do
       eq(%w(mecha-skill-shot skill-shot))
 
     # it only notifies for new achievements
-    expect(scraper).to receive(:stats_for_player).with('DON').and_return(
+    expect(scraper).to receive(:stats_for_player).with(p).and_return(
       high_score: 100,
       plays: 3,
       achievements: %w(skill-shot mecha-skill-shot secret-skill-shot)
@@ -121,5 +121,18 @@ describe Syncer do
 
     expect(p.achievements.map(&:slug).sort).to \
       eq(%w(mecha-skill-shot secret-skill-shot skill-shot))
+
+    # it updates the stern id if it retrieves one
+    expect(p.stern_id).to be_nil
+    expect(scraper).to receive(:stats_for_player).with(p).and_return(
+      high_score: 100,
+      plays: 3,
+      achievements: [],
+      stern_id: '1234',
+    )
+    Syncer.sync!(notify: true)
+    p.reload
+
+    expect(p.stern_id).to eq('1234')
   end
 end

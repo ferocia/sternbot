@@ -5,6 +5,18 @@ class SternInsiderScraper
     ENV.fetch("INSIDER_USERNAME")
   end
 
+  def self.stern_id_from_url(url)
+    url.match(/connections\/(\d+)\//)[1]
+  end
+
+  def self.stats_page_url_for(player)
+    "/insider/connections/#{player.stern_id}/stats"
+  end
+
+  def self.godzilla_stats_page_url_for(player)
+    "/insider/connections/#{player.stern_id}/gameStats/106"
+  end
+
   def login!
     session.visit '/login'
 
@@ -15,17 +27,21 @@ class SternInsiderScraper
 
     session.click_link 'Connections'
 
+    @default_url = session.current_url
+
     true
   end
 
-  def stats_for_player(player_tag)
-    session.find('a', text: player_tag).click
-    session.click_link 'Godzilla'
+  def stats_for_player(player)
+    if player.stern_id.present?
+      session.visit godzilla_stats_page_url_for(player)
+    else
+      session.find('a', text: player_tag).click
+      session.click_link 'Godzilla'
+    end
 
     summary_tds = session.find('th', text: 'HIGH SCORE')
-      .send(:parent) # tr
-      .send(:parent) # thead
-      .send(:parent) # table
+      .ancestor('table')
       .find('tbody')
       .find('tr')        # Only one row in this table
       .find_all('td')
@@ -51,13 +67,15 @@ class SternInsiderScraper
       achievements += slugs.zip(stars).select {|_, x| x }.map(&:first)
     end
 
-    session.go_back
-    session.go_back
+    stern_id = self.stern_id_from_url(session.current_url)
+
+    return_to_connections_page
 
     {
       high_score: score.gsub(/[^0-9]/, "").to_i,
       plays: plays.gsub(/[^0-9]/, "").to_i,
-      achievements: achievements
+      achievements: achievements,
+      stern_id:,
     }
   rescue => e
     if Rails.const_defined?("Console")
@@ -68,14 +86,7 @@ class SternInsiderScraper
   end
 
   def add_connection!(username)
-    session.fill_in 'Search', with: username
-
-    # Button text changes depending on browser width :cool:
-    if session.has_button?("Search")
-      session.click_button "Search"
-    else
-      session.click_button "Go"
-    end
+    search_for(username)
 
     # we want to match the username exactly, but allow for variations in case
     user_row = session.find('span', exact_text: /#{username}/i).ancestor('li')
@@ -86,8 +97,11 @@ class SternInsiderScraper
 
     tag = user_row.find('p.uppercase').text
 
-    session.go_back
-    tag
+    stern_id = self.stern_id_from_url(user_row.find('a')[:href])
+
+    return_to_connections_page
+
+    { tag:, stern_id: }
   rescue => e
     if Rails.const_defined?("Console")
       puts e.inspect
@@ -96,20 +110,19 @@ class SternInsiderScraper
     raise e
   end
 
-  def remove_connection!(username)
-    session.fill_in 'Search', with: username
-
-    # Button text changes depending on browser width :cool:
-    if session.has_button?("Search")
-      session.click_button "Search"
+  def remove_connection!(player)
+    if player.stern_id.present?
+      session.visit self.stats_page_url_for(player)
     else
-      session.click_button "Go"
+      self.search_for(player.username)
     end
 
     if session.has_button?("Unfollow")
       session.click_button "Unfollow"
     end
-    session.go_back
+
+    return_to_connections_page
+
     true
   rescue => e
     if Rails.const_defined?("Console")
@@ -117,6 +130,18 @@ class SternInsiderScraper
       binding.pry
     end
     raise e
+  end
+
+  def search_for(username)
+    search_field = session.find('input', id: 'username-search')
+
+    search_field.fill_in with: username
+
+    search_field.sibling('button').click
+  end
+
+  def return_to_connections_page
+    session.visit @default_url
   end
 
   def session
@@ -131,8 +156,10 @@ class SternInsiderScraper
     # how all these gems interact...
     Selenium::WebDriver::Chrome.path = chrome_bin if chrome_bin
 
-    # Comment out for debugging
-    options.add_argument('--headless')
+    if ENV["SHOW_CHROME_UI"].nil? || ENV["SHOW_CHROME_UI"] == "0"
+      # Comment out for debugging (or set the envvar to 1)
+      options.add_argument('--headless')
+    end
 
     Capybara.register_driver :chrome do |app|
       Capybara::Selenium::Driver.new(
