@@ -144,7 +144,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (5.0.1)
-    puma (5.6.5)
+    puma (5.6.7)
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.7.1)
@@ -246,7 +246,7 @@ DEPENDENCIES
   good_job
   pg
   pry
-  puma (~> 5.0)
+  puma (~> 5.6)
   rails (~> 7.0.5)
   rspec
   selenium-webdriver
