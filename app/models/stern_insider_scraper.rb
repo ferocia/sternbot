@@ -36,7 +36,7 @@ class SternInsiderScraper
     if player.stern_id.present?
       session.visit godzilla_stats_page_url_for(player)
     else
-      session.find('a', text: player_tag).click
+      session.find('a', text: player.tag).click
       session.click_link 'Godzilla'
     end
 
@@ -67,7 +67,7 @@ class SternInsiderScraper
       achievements += slugs.zip(stars).select {|_, x| x }.map(&:first)
     end
 
-    stern_id = self.stern_id_from_url(session.current_url)
+    stern_id = self.class.stern_id_from_url(session.current_url)
 
     return_to_connections_page
 

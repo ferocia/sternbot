@@ -29,7 +29,10 @@ describe Syncer do
   example 'add/remove player and high score syncing' do
     # it can add a player idempotently
     expect(scraper).to \
-      receive(:add_connection!).with('donalias').and_return('DON')
+      receive(:add_connection!).with('donalias').and_return(
+        tag: 'DON',
+        stern_id: 1
+      )
 
     Syncer.add_player!('donalias')
     Syncer.add_player!('donalias')
