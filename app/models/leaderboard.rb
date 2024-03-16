@@ -16,6 +16,13 @@ class Leaderboard
       .map {|x| [x.tag, x.username, x.plays, x.high_score] }
   end
 
+  def self.player_score_history(tag, n: 5)
+    Player
+      .find_by!(tag: tag.upcase)
+      .highest_scores(n: n)
+      .map {|x| [x.value, x.observed_at] }
+  end
+
   def self.achievements
     data = {}
     as = Achievement.includes(:player).all

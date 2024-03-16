@@ -12,6 +12,20 @@ class AsciiLeaderboard
     t.to_s
   end
 
+  def self.player_score_history(tag, n: 5)
+    t = new_table!(%w(Score Date))
+
+    Leaderboard.player_score_history(tag, n: n).each do |x|
+      t << [
+        x[0].to_fs(:delimited),
+        x[1].strftime("%A, %-e %b '%y")
+      ]
+    end
+
+    t.align_column(0, :right)
+    t.to_s
+  end
+
   def self.player_highs
     t = new_table!(%w(Tag Username Plays Best))
     Leaderboard.player_highs.each do |x|
