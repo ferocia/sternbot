@@ -13,7 +13,7 @@ class SlackCommandProcessor
 :pinball: achievements {tag}
 :pinball: leaderboard {3}
 :pinball: players
-:pinball: scores {tag} {5}
+:pinball: high_scores {tag} {5}
 :pinball: add {stern_insider_username}
 :pinball: remove {stern_insider_username}
 ```
@@ -28,8 +28,9 @@ EOS
       when 'achievements'
         text = AsciiLeaderboard.achievements(tag: tokens[1])
         return "```\n#{text}\n```"
-      when 'scores'
+      when 'high_scores'
         tag = tokens[1]
+        return unless tag
         n = tokens.length > 2 ? tokens[2].to_i : 5
 
         text = AsciiLeaderboard.player_score_history(tag, n: n)
