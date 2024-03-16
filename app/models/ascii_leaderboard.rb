@@ -47,11 +47,7 @@ class AsciiLeaderboard
       : new_table!(%w(Name % Tags))
     Leaderboard.achievements(tag: tag).each do |x|
       percent = (x[2] * 100).to_i
-      tags = if percent > 50
-        "Most!"
-      else
-        x[1].sort.join(", ")
-      end
+      tags = x[1].sort.join(", ")
       if tag
         t << [
           x[0],

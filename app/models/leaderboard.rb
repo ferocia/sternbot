@@ -30,14 +30,22 @@ class Leaderboard
     as.each do |a|
       a_data = Achievements.find(a.slug)
       data[a_data.name] ||= []
-      if tag.nil? || tag == a.player.tag
+      if tag.nil? || tag.upcase == a.player.tag.upcase
         data[a_data.name] << a.player.tag
       end
     end
     denominator = Player.count
 
-    data.map {|row|
+    data = data.map {|row|
       row << row[1].length / denominator.to_f
-    }.sort_by {|slug, ps| [-ps.size, slug] }
+    }
+
+    data =
+      if tag
+        data.sort_by {|slug, ps| slug }
+      else
+        data.sort_by {|slug, ps| [-ps.size, slug] }
+      end
+    data
   end
 end
