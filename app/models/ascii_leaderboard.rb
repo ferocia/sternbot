@@ -41,22 +41,31 @@ class AsciiLeaderboard
     t.to_s
   end
 
-  def self.achievements
-    t = new_table!(%w(Name % Tags))
-    Leaderboard.achievements.each do |x|
+  def self.achievements(tag: nil)
+    t = tag ?
+        new_table!(["Name", tag.upcase])
+      : new_table!(%w(Name % Tags))
+    Leaderboard.achievements(tag: tag).each do |x|
       percent = (x[2] * 100).to_i
       tags = if percent > 50
         "Most!"
       else
         x[1].sort.join(", ")
       end
-      t << [
-        x[0],
-        percent,
-        tags
-      ]
+      if tag
+        t << [
+          x[0],
+          ("✓" if percent > 0)
+        ]
+      else
+        t << [
+          x[0],
+          percent,
+          tags
+        ]
+      end
     end
-    t.align_column(1, :right)
+    t.align_column(1, :right) unless tag
     t.to_s
   end
 

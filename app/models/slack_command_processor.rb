@@ -10,7 +10,7 @@ class SlackCommandProcessor
       when 'help'
         return(<<-EOS)
 ```
-:pinball: achievements
+:pinball: achievements {tag}
 :pinball: leaderboard {3}
 :pinball: players
 :pinball: scores {tag} {5}
@@ -26,7 +26,7 @@ EOS
         leaderboard = AsciiLeaderboard.player_highs
         return "```\n#{leaderboard}\n```"
       when 'achievements'
-        text = AsciiLeaderboard.achievements
+        text = AsciiLeaderboard.achievements(tag: takens[1])
         return "```\n#{text}\n```"
       when 'scores'
         tag = tokens[1]
