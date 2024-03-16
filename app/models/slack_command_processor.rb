@@ -26,7 +26,7 @@ EOS
         leaderboard = AsciiLeaderboard.player_highs
         return "```\n#{leaderboard}\n```"
       when 'achievements'
-        text = AsciiLeaderboard.achievements(tag: takens[1])
+        text = AsciiLeaderboard.achievements(tag: tokens[1])
         return "```\n#{text}\n```"
       when 'scores'
         tag = tokens[1]
