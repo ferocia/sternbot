@@ -34,7 +34,7 @@ class SternInsiderScraper
 
   def stats_for_player(player)
     if player.stern_id.present?
-      session.visit godzilla_stats_page_url_for(player)
+      session.visit self.class.godzilla_stats_page_url_for(player)
     else
       session.find('a', text: player.tag).click
       session.click_link 'Godzilla'
