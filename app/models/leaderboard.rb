@@ -16,13 +16,23 @@ class Leaderboard
       .map {|x| [x.tag, x.username, x.plays, x.high_score] }
   end
 
-  def self.achievements
+  def self.player_score_history(tag, n: 5)
+    Player
+      .find_by!(tag: tag.upcase)
+      .highest_scores(n: n)
+      .map {|x| [x.value, x.observed_at] }
+  end
+
+  def self.achievements(tag: nil)
     data = {}
-    as = Achievement.includes(:player).all
+    scope = Achievement.includes(:player)
+    as = scope.all
     as.each do |a|
       a_data = Achievements.find(a.slug)
       data[a_data.name] ||= []
-      data[a_data.name] << a.player.tag
+      if tag.nil? || tag == a.player.tag
+        data[a_data.name] << a.player.tag
+      end
     end
     denominator = Player.count
 
