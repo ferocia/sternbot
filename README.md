@@ -27,3 +27,8 @@ It's deployed to heroku. Some handy commands:
     heroku logs --tail
 
 You can access admin interface at https://ferocia-sternbot.herokuapp.com/good_job
+
+To run a sync locally for testing:
+
+    rails console
+    Syncer.sync!(notify: false)
