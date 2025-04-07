@@ -59,4 +59,4 @@ gem "pry"
 
 gem "pg"
 gem "terminal-table"
-gem 'good_job'
+gem 'good_job', '3.99'
