@@ -21,3 +21,9 @@ every new observation of a high score, which gives us fake history.
 ## Maintenance
 
 The action happens in a background job (`SyncJob`) that is scheduled using Good Job's cron.
+
+It's deployed to heroku. Some handy commands:
+
+    heroku logs --tail
+
+You can access admin interface at https://ferocia-sternbot.herokuapp.com/good_job
