@@ -20,10 +20,13 @@ class SternInsiderScraper
   def login!
     session.visit '/login'
 
-    session.fill_in 'Email', with: self.class.username
-    session.fill_in 'Password', with: ENV.fetch("INSIDER_PASSWORD")
+    # Note: due to weird JS, the inputs are disabled in a way that trying to
+    # address them via label doesn't work. Using input name instead is a hack,
+    # but doesn't seem too egregious.
+    session.fill_in 'emailAddress', with: self.class.username
+    session.fill_in 'password', with: ENV.fetch("INSIDER_PASSWORD")
 
-    session.click_button 'Done'
+    session.click_button 'Login'
 
     session.click_link 'Connections'
 
