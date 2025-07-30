@@ -1,5 +1,7 @@
 # Sternbot
 
+**THIS PROJECT IS NO LONGER ACTIVE.** Stern Insider removed data from their dashboards such that there is no longer anyway to scrape the needed data.
+
 An app to scrape player stats fom Stern Insider Connected.
 
 ## Synopsis
